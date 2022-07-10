@@ -1,0 +1,5 @@
+Public Url to GitHub repository: 
+Public URL for your S3 Bucket:
+Public URL for your CloudFront distribution:
+Public URLs to deployed application back-end in EC2:
+Public URL to your Prometheus Server:
