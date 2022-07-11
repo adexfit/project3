@@ -155,6 +155,6 @@ workflows:
           requires: [build-frontend] 
       - notify:
           context: slackalert
-            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
 
     
