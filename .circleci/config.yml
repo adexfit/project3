@@ -131,12 +131,12 @@ jobs:
     docker: 
       - image: 'cimg/base:stable'
     steps:
-- slack/notify:
-    event: fail
-    template: base_fail_1
-- slack/notify:
-    event: pass
-    template: success_tagged_deploy_1
+      - slack/notify:
+          event: fail
+          template: base_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
 
 
