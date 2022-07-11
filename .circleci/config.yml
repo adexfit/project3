@@ -51,7 +51,7 @@ jobs:
             npm run build
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-build
+          key: frontend-build    
 
   build-backend:
     docker:
@@ -104,7 +104,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-build]kachaskjdhajkhdja
+          keys: [frontend-build]
       - run:
           name: scan front-end
           command: |
@@ -155,5 +155,6 @@ workflows:
           requires: [build-frontend] 
       - notify:
           context: slackalert
+            requires: [test-frontend, test-backend, scan-frontend, scan-backend]
 
     
