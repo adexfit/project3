@@ -16,7 +16,7 @@ async function bootstrap() {
   logger.info(JSON.stringify(process.env));
   const server = express();
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server), {
-    logger,  jsdkjsjkd
+    logger,  
   });
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
   const apiVersionPrefix: string = process.env.API_VERSION || 'api';

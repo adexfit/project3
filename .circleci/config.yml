@@ -128,13 +128,12 @@ jobs:
             npm install oauth-sign@^0.9.0
             npm audit fix --audit-level=critical 
   notify:
-    deploy:
-      docker: 
-        - image: 'cimg/base:stable'
-      steps:
-        - slack/notify:
-            event: fail
-            template: base_fail_1
+    docker: 
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          event: fail
+          template: base_fail_1
 
 
 
