@@ -238,3 +238,19 @@ workflows:
           requires: [smoke-test]
       - cleanup:
           requires: [cloudfront-update]
+
+
+
+
+      - notify:
+          context: slackalert   
+
+          
+            
+  notify:
+    docker: 
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          event: fail
+          template: base_fail_1
