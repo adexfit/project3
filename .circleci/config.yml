@@ -195,6 +195,22 @@ jobs:
       - destroy-environment
 
 
+  run-migrations:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      # Checkout code from git
+      - run:
+          name: Run migrations
+          command: |
+            cd backend
+            npm install
+            npm run migrations --force > migrations_dump.txt
+  
+
+
+
+
 workflows:
   default:
     jobs:
@@ -215,6 +231,7 @@ workflows:
               only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-
+      - run-migrations:
+          requires: [configure-infrastructure]
 
     
