@@ -208,12 +208,52 @@ jobs:
             npm install
             npm run migrations --force > migrations_dump.txt
       - run:
-        name: Send migration status to kvdb.io 
-        command: |   
-            curl https://kvdb.io/Kzad5qEVNLnA3cz6137mG1/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+          name: Send migration status to kvdb.io 
+          command: |   
+              curl https://kvdb.io/Kzad5qEVNLnA3cz6137mG1/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
       - revert-migrations
-      - destroy-environment             
+      - destroy-environment 
 
+
+  deploy-frontend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            cd frontend
+            sudo npm install webpack-dev-server -g
+            sudo npm install
+      - run:
+          name: Get backend url
+          command: |
+            export BACKEND_IP=$(sed -n 2p .circleci/ansible/inventory.txt)
+            export API_URL="http://${BACKEND_IP}:3030"
+            echo "API_URL = ${API_URL}"
+            echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
+            cat frontend/.env
+      - run:
+          name: Build frontend
+          command: |
+            cd frontend
+            ls -la
+            cat .env
+            npm run build
+      - aws-cli/setup
+      - run:
+          name: Deploy frontend objects
+          command: |
+            cd frontend
+            npm install
+            npm run build
+            tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
+            aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+      - revert-migrations
+      - destroy-environment  
 
 workflows:
   default:
