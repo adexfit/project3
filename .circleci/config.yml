@@ -268,7 +268,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible openssh-client tar gzip 
+            apk add --update ansible openssh-client tar gzip node npm
       - restore_cache:
           keys: ["backend-dist"]  
       - run:
