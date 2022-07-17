@@ -336,7 +336,28 @@ jobs:
             apk add --update py3-pip && pip3 install --upgrade pip && pip3 install awscli            
       - destroy-environment
       - revert-migrations
- 
+
+  cloudfront-update:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update py3-pip && pip3 install --upgrade pip && pip3 install awscli
+            apk add --update curl
+      - run:
+          name: Update cloudfront distribution
+          command: |
+            # your code here
+            aws cloudformation deploy \
+              --template-file .circleci/files/cloudfront.yml \
+              --stack-name "InitialStack" \
+              --parameter-overrides WorkflowID="<< pipeline.parameters.workflow-id >>" \
+              --tags project=udapeople
+      - revert-migrations
+      - destroy-environment   
 
 
 workflows:
