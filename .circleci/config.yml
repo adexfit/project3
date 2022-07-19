@@ -222,9 +222,9 @@ jobs:
             sudo npm install
             # npm audit fix --audit-level=critical --force
             # sudo npm run build
-            sudo npm run migrations > migration.log
-            cat migration.log
-            migration_status=$(cat migration.log | grep -c "has been executed successfully")
+            sudo npm run migrations > migrations_dump.txt
+            cat migrations_dump.txt
+            migration_status=$(cat migrations_dump.txt | grep -c "has been executed successfully")
             if [ $migration_status > 0 ]; then exit 0; else exit 1; fi;
 
       - run:
