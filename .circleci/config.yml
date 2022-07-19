@@ -219,10 +219,8 @@ jobs:
             echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
             # ---
             cd backend
-            sudo npm install
-            # npm audit fix --audit-level=critical --force
-            # sudo npm run build
-            sudo npm run migrations > migrations_dump.txt
+            npm install
+            npm run migrations --force > migrations_dump.txt
             cat migrations_dump.txt
             migration_status=$(cat migrations_dump.txt | grep -c "has been executed successfully")
             if [ $migration_status > 0 ]; then exit 0; else exit 1; fi;
