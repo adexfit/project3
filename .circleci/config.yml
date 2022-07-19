@@ -198,11 +198,11 @@ jobs:
   run-migrations:
     docker:
       - image: circleci/node:13.8.0
-      - restore_cache:
-          keys: [backend-build]
     steps:
       # Checkout code from git
       - checkout
+      - restore_cache:
+          keys: [backend-build]
       - run:
           name: Run migrations
           command: |
