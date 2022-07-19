@@ -287,3 +287,9 @@ workflows:
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
+
+
+
+            cd backend
+            npm install
+            npm run migrations --force > migrations_dump.txt
