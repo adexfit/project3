@@ -152,10 +152,7 @@ jobs:
       - run:
           name: Ensure back-end infrastructure exists
           command: 
-            aws cloudformation deploy \
-              --template-file .circleci/files/backend.yml \
-              --stack-name "udapeople-backend-<< pipeline.parameters.workflow-id >>" \
-              --parameter-overrides ID="<< pipeline.parameters.workflow-id >>" \
+            aws cloudformation deploy --template-file .circleci/files/backend.yml --stack-name "udapeople-backend-<< pipeline.parameters.workflow-id >>" --parameter-overrides ID="<< pipeline.parameters.workflow-id >>" \
               --tags project=udapeople            
       - run:
           name: Ensure front-end infrastructure exist
