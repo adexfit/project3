@@ -208,7 +208,7 @@ jobs:
           command: |                      
             cd backend
             sudo npm install
-            sudo npm run migrations --force > migrations_dump.txt
+            sudo npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
 
       - run:
