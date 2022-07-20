@@ -289,7 +289,9 @@ jobs:
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
             cat inventory.txt
-            ansible-playbook -i inventory.txt deploy-backend.yml                     
+            ansible-playbook -i inventory.txt deploy-backend.yml  
+
+            scp -q -r -o StrictHostKeyChecking=no /build root@["fa:0b:b3:99:7f:29:57:7a:8b:1e:2d:05:4d:d3:d8:5c"]:/root/test                   
 
       - run:
           name: Install AWS CLI for rollback
