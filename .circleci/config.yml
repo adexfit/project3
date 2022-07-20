@@ -376,13 +376,6 @@ jobs:
         - attach_workspace:
             at: ~/
         - run:
-            name: Remove bucket created manually
-            command: |
-              cat ~/oldbucketid.txt
-              export OldBucketID=$(cat ~/oldbucketid.txt)
-              aws s3 rm "s3://udapeople-${OldBucketID}" --recursive
-              aws s3api delete-bucket --bucket udapeople-${OldBucketID}
-        - run:
             name: Remove stacks
             command: |
               # Fetch the Old workflow ID
