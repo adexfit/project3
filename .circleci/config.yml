@@ -376,6 +376,13 @@ jobs:
         - attach_workspace:
             at: ~/
         - run:
+            name: Remove buckets
+            command: |
+              cat ~/oldbucketid.txt
+              export OldBucketID=$(cat ~/oldbucketid.txt)
+              aws s3 rm "s3://udapeople-${OldBucketID}" --recursive
+              aws s3api delete-bucket --bucket udapeople-${OldBucketID}
+        - run:
             name: Remove stacks
             command: |
               # Fetch the Old workflow ID
@@ -388,12 +395,11 @@ jobs:
               echo Stack names: "${STACKS[@]}"  
               if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID}" ]]
               then
-                echo "---------------Deletconfirmed--------------"
-                aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
                 aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
+                aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
                 aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
               else
-                echo "----------Cannot clean up-----------"
+                echo "No old stacks to be deleted"
               fi    
 
 workflows:
