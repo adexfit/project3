@@ -1,5 +1,5 @@
 Public Url to GitHub repository: https://github.com/adexfit/project3
-Public URL for your S3 Bucket: http://udapeople-4698847.s3-website-us-east-1.amazonaws.com
-Public URL for your CloudFront distribution: https://d3gvmsvg256jzr.cloudfront.net
-Public URLs to deployed application back-end in EC2:34.227.27.182
-Public URL to your Prometheus Server: http://ec2-44-201-250-211.compute-1.amazonaws.com:9090/targets
+Public URL for your S3 Bucket: http://udapeople-7e1270d.s3-website-us-east-1.amazonaws.com
+Public URL for your CloudFront distribution: https://dl4ybzvum6ns5.cloudfront.net
+Public URLs to deployed application back-end in EC2: 52.206.149.148
+Public URL to your Prometheus Server: http://ec2-18-212-171-49.compute-1.amazonaws.com:9090/targets
